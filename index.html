@@ -1,0 +1,392 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multilingual Travel Guide</title>
+    <style>
+        :root {
+            --primary-color: #4e94b9;
+            --secondary-color: #a7d1ab;
+            --accent-color: #f2a365;
+            --text-color-light: #333;
+            --text-color-dark: #eee;
+            --bg-color-light: #fff;
+            --bg-color-dark: #222;
+            --border-color: #ddd;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color-light);
+            color: var(--text-color-light);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-theme {
+            --bg-color-light: #222;
+            --text-color-light: #eee;
+            --border-color: #555;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        header {
+            background: var(--primary-color);
+            color: #fff;
+            padding-top: 20px;
+            min-height: 70px;
+            border-bottom: 3px solid var(--secondary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+            padding: 0 10px;
+        }
+
+        header #branding {
+            float: left;
+        }
+
+        header #branding h1 {
+            margin: 0;
+        }
+
+        header nav {
+            float: right;
+            margin-top: 10px;
+        }
+
+        header .highlight, header .current a {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        header a:hover {
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        /* Language Dropdown */
+        .language-selector {
+            position: relative;
+            display: inline-block;
+        }
+
+        .language-selector select {
+            appearance: none;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Dark Theme Toggle */
+        .theme-toggle {
+            cursor: pointer;
+            font-size: 20px;
+            user-select: none;
+        }
+
+        /* Main Content */
+        #showcase {
+            min-height: 400px;
+            background: url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
+            text-align: center;
+            color: #fff;
+        }
+
+        #showcase h1 {
+            margin-top: 100px;
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+
+        #showcase p {
+            font-size: 20px;
+        }
+
+        #destinations {
+            padding: 15px;
+            text-align: center;
+        }
+
+        #destinations .destination-card {
+            display: inline-block;
+            width: 30%;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--bg-color-light);
+            transition: transform 0.3s;
+        }
+
+        #destinations .destination-card:hover {
+            transform: translateY(-5px);
+        }
+
+        #destinations img {
+            width: 100%;
+            border-radius: 8px;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        /* Footer */
+        footer {
+            padding: 20px;
+            margin-top: 20px;
+            color: #fff;
+            background-color: var(--primary-color);
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media(max-width: 768px) {
+            header,
+            header nav,
+            header nav li,
+            #destinations .destination-card {
+                float: none;
+                text-align: center;
+                width: 100%;
+            }
+
+            header {
+                padding-bottom: 20px;
+            }
+
+            header nav,
+            .language-selector,
+            .theme-toggle {
+                display: block;
+                width: 100%;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            #showcase h1 {
+                font-size: 30px;
+            }
+
+            #destinations .destination-card {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><a href="index.html">Travel Guide</a></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li class="current"><a href="index.html" data-lang="home">Home</a></li>
+                    <li><a href="#" data-lang="destinations">Destinations</a></li>
+                    <li><a href="#" data-lang="tips">Tips</a></li>
+                    <li><a href="#" data-lang="contact">Contact</a></li>
+                </ul>
+                <div class="language-selector">
+                    <select id="language-select">
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                    </select>
+                </div>
+                <div class="theme-toggle" id="theme-toggle">🌙</div>
+            </nav>
+        </div>
+    </header>
+
+    <section id="showcase">
+        <div class="container">
+            <h1 data-lang="welcome">Welcome to Our Travel Guide</h1>
+            <p data-lang="explore">Explore the world with us and discover amazing destinations.</p>
+        </div>
+    </section>
+
+    <section id="destinations">
+        <div class="container">
+            <h2 data-lang="featured">Featured Destinations</h2>
+            <div class="destination-card">
+                <img src="https://via.placeholder.com/400x200" alt="Destination 1">
+                <h3 data-lang="dest1">Destination 1</h3>
+                <p data-lang="dest1_desc">Description of Destination 1.</p>
+            </div>
+            <div class="destination-card">
+                <img src="https://via.placeholder.com/400x200" alt="Destination 2">
+                <h3 data-lang="dest2">Destination 2</h3>
+                <p data-lang="dest2_desc">Description of Destination 2.</p>
+            </div>
+            <div class="destination-card">
+                <img src="https://via.placeholder.com/400x200" alt="Destination 3">
+                <h3 data-lang="dest3">Destination 3</h3>
+                <p data-lang="dest3_desc">Description of Destination 3.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Travel Guide, Copyright &copy; 2023</p>
+    </footer>
+
+    <script>
+        // Dark Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // Check for saved theme preference
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            body.classList.add(currentTheme);
+            updateThemeToggleIcon(currentTheme);
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark-theme')) {
+                body.classList.remove('dark-theme');
+                localStorage.setItem('theme', '');
+                updateThemeToggleIcon('');
+            } else {
+                body.classList.add('dark-theme');
+                localStorage.setItem('theme', 'dark-theme');
+                updateThemeToggleIcon('dark-theme');
+            }
+        });
+
+        function updateThemeToggleIcon(theme) {
+            themeToggle.textContent = theme === 'dark-theme' ? '☀️' : '🌙';
+        }
+
+        // Language Switching
+        const languageSelect = document.getElementById('language-select');
+        let langData = {};
+
+        // Fetch language data
+        fetchLanguageData('en'); // Default to English
+
+        languageSelect.addEventListener('change', (event) => {
+            fetchLanguageData(event.target.value);
+        });
+
+        function fetchLanguageData(lang) {
+            fetch(`lang/${lang}.json`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    langData = data;
+                    updateContent();
+                })
+                .catch(error => {
+                    console.error("Could not fetch language data:", error);
+                    // Provide fallback or default content if JSON fails to load
+                    langData = {
+                        "home": "Home",
+                        "destinations": "Destinations",
+                        "tips": "Tips",
+                        "contact": "Contact",
+                        "welcome": "Welcome to Our Travel Guide",
+                        "explore": "Explore the world with us and discover amazing destinations.",
+                        "featured": "Featured Destinations",
+                        "dest1": "Destination 1",
+                        "dest1_desc": "Description of Destination 1.",
+                        "dest2": "Destination 2",
+                        "dest2_desc": "Description of Destination 2.",
+                        "dest3": "Destination 3",
+                        "dest3_desc": "Description of Destination 3."
+                    };
+                    updateContent(); // Update with default content
+                });
+        }
+
+
+        function updateContent() {
+            document.querySelectorAll('[data-lang]').forEach(element => {
+                const key = element.getAttribute('data-lang');
+                if (langData[key]) {
+                    element.textContent = langData[key];
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+```
+
+```json
+//lang/en.json file
+{
+    "home": "Home",
+    "destinations": "Destinations",
+    "tips": "Tips",
+    "contact": "Contact",
+    "welcome": "Welcome to Our Travel Guide",
+    "explore": "Explore the world with us and discover amazing destinations.",
+    "featured": "Featured Destinations",
+    "dest1": "Destination 1",
+    "dest1_desc": "Description of Destination 1.",
+    "dest2": "Destination 2",
+    "dest2_desc": "Description of Destination 2.",
+    "dest3": "Destination 3",
+    "dest3_desc": "Description of Destination 3."
+}
+```
+
+```json
+//lang/es.json file
+{
+    "home": "Inicio",
+    "destinations": "Destinos",
+    "tips": "Consejos",
+    "contact": "Contacto",
+    "welcome": "Bienvenido a Nuestra Guía de Viajes",
+    "explore": "Explora el mundo con nosotros y descubre destinos increíbles.",
+    "featured": "Destinos Destacados",
+    "dest1": "Destino 1",
+    "dest1_desc": "Descripción del Destino 1.",
+    "dest2": "Destino 2",
+    "dest2_desc": "Descripción del Destino 2.",
+    "dest3": "Destino 3",
+    "dest3_desc": "Descripción del Destino 3."
+}
+```
+
+```json
+//lang/fr.json file
+{
+    "home": "Accueil",
+    "destinations": "Destinations",
+    "tips": "Conseils",
+    "contact": "Contact",
+    "welcome": "Bienvenue dans Notre Guide de Voyage",
+    "explore": "Explorez le monde avec nous et découvrez des destinations incroyables.",
+    "featured": "Destinations Vedettes",
+    "dest1": "Destination 1",
+    "dest1_desc": "Description de la Destination 1.",
+    "dest2": "Destination 2",
+    "dest2_desc": "Description de la Destination 2.",
+    "dest3": "Destination 3",
+    "dest3_desc": "Description de la Destination 3."
+}
